@@ -1,0 +1,1 @@
+web: gunicorn vichal_parking.wsgi

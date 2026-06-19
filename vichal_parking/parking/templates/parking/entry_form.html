@@ -1,0 +1,24 @@
+{% extends "parking/base.html" %}
+{% block title %}Vehicle Entry - Vichal Parking{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h2>Vehicle Entry</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label for="vehicle_number">Vehicle Number</label>
+                <input type="text" id="vehicle_number" name="vehicle_number" placeholder="e.g. TN09AB1234" required>
+            </div>
+            <div class="field">
+                <label for="vehicle_type">Vehicle Type</label>
+                <select id="vehicle_type" name="vehicle_type">
+                    <option value="car">Car (&#8377;20/hr)</option>
+                    <option value="bike">Bike (&#8377;10/hr)</option>
+                    <option value="truck">Truck (&#8377;40/hr)</option>
+                </select>
+            </div>
+            <button type="submit">Park Vehicle</button>
+        </form>
+    </div>
+{% endblock %}

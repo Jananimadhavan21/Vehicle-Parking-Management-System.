@@ -1,0 +1,43 @@
+{% extends "parking/base.html" %}
+{% block title %}Dashboard - Vichal Parking{% endblock %}
+
+{% block content %}
+    <div class="stats-grid">
+        <div class="stat-box">
+            <div class="value">{{ stats.total_slots }}</div>
+            <div class="label">Total Slots</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">{{ stats.available_slots }}</div>
+            <div class="label">Available</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">{{ stats.occupied_slots }}</div>
+            <div class="label">Occupied</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">&#8377;{{ stats.total_revenue }}</div>
+            <div class="label">Total Revenue</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Live Slot Status</h2>
+        <div class="slots-grid">
+            {% for slot_id, slot in slots.items %}
+                <div class="slot {% if slot.occupied %}occupied{% else %}free{% endif %}">
+                    Slot {{ slot_id }}
+                    {% if slot.occupied %}
+                        <small>{{ slot.vehicle_number }}<br>{{ slot.vehicle_type|title }}</small>
+                    {% else %}
+                        <small>Free</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="actions">
+            <a class="btn" href="{% url 'vehicle_entry' %}">+ New Vehicle Entry</a>
+            <a class="btn secondary" href="{% url 'vehicle_exit' %}">Vehicle Exit / Billing</a>
+        </div>
+    </div>
+{% endblock %}

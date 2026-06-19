@@ -1,0 +1,53 @@
+{% extends "parking/base.html" %}
+{% block title %}Reports - Vichal Parking{% endblock %}
+
+{% block content %}
+    <div class="stats-grid">
+        <div class="stat-box">
+            <div class="value">{{ stats.total_visits }}</div>
+            <div class="label">Total Visits</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">&#8377;{{ stats.total_revenue }}</div>
+            <div class="label">Total Revenue</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">{{ stats.occupied_slots }}</div>
+            <div class="label">Currently Parked</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Parking History</h2>
+        {% if history %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Type</th>
+                    <th>Slot</th>
+                    <th>Entry</th>
+                    <th>Exit</th>
+                    <th>Hours</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in history %}
+                <tr>
+                    <td>{{ record.vehicle_number }}</td>
+                    <td>{{ record.vehicle_type|title }}</td>
+                    <td>{{ record.slot_id }}</td>
+                    <td>{{ record.entry_time }}</td>
+                    <td>{{ record.exit_time }}</td>
+                    <td>{{ record.duration_hours }}</td>
+                    <td>&#8377;{{ record.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No completed visits yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

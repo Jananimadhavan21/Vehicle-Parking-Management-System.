@@ -1,0 +1,31 @@
+{% extends "parking/base.html" %}
+{% block title %}Vehicle Exit - Vichal Parking{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h2>Vehicle Exit / Billing</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label for="vehicle_number">Vehicle Number</label>
+                <input type="text" id="vehicle_number" name="vehicle_number" placeholder="e.g. TN09AB1234" required>
+            </div>
+            <button type="submit">Process Exit &amp; Generate Bill</button>
+        </form>
+    </div>
+
+    {% if bill %}
+    <div class="card">
+        <h2>Bill Generated</h2>
+        <table>
+            <tr><th>Vehicle Number</th><td>{{ bill.vehicle_number }}</td></tr>
+            <tr><th>Vehicle Type</th><td>{{ bill.vehicle_type|title }}</td></tr>
+            <tr><th>Slot</th><td>{{ bill.slot_id }}</td></tr>
+            <tr><th>Entry Time</th><td>{{ bill.entry_time }}</td></tr>
+            <tr><th>Exit Time</th><td>{{ bill.exit_time }}</td></tr>
+            <tr><th>Duration (hours)</th><td>{{ bill.duration_hours }}</td></tr>
+            <tr><th>Amount</th><td><strong>&#8377;{{ bill.amount }}</strong></td></tr>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}
